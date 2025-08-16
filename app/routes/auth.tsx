@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router";
 
 import { usePuterStore } from "../../lib/puter";
-import { useLocation, useNavigate } from "react-router";
 
 export const meta = () => ([
     { title: "Resumind | Auth" },
@@ -11,7 +11,7 @@ export const meta = () => ([
 const Auth = () => {
     const { isLoading, auth } = usePuterStore();
     const location = useLocation();
-    const next = location.search.split('next=')[1];
+    const next = location.search.split("next=")[1];
     const navigate = useNavigate();
 
     useEffect(() => {
