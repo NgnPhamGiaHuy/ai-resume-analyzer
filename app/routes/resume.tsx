@@ -8,7 +8,7 @@ import Summary from "~/components/Summary";
 import { usePuterStore } from "../../lib/puter";
 
 export const meta = () => ([
-    { title: "Resumind | Review" },
+    { title: "CVGenius | Review" },
     { name: "description", content: "Detailed overview of your resume" },
 ]);
 

@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from "react-router";
 import { usePuterStore } from "../../lib/puter";
 
 export const meta = () => ([
-    { title: "Resumind | Auth" },
-    { name: "description", content: "Log into your account" },
+    { title: "CVGenius | Auth" },
+    { name: "description", content: "Sign in to continue" },
 ]);
 
 const Auth = () => {

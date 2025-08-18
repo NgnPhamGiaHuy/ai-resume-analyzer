@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <nav className={"navbar"}>
             <Link to={"/"}>
-                <p className={"text-2xl text-gradient font-bold uppercase"}>Resumind</p>
+                <p className={"text-2xl text-gradient font-bold uppercase"}>CVGenius</p>
             </Link>
             <Link to={"/upload"} className={"w-fit primary-button"}>
                 Upload Resume
