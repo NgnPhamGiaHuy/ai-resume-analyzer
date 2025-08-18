@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import type { Route } from "./+types/home";
 import { useLocation, useNavigate } from "react-router";
 
-import { resumes } from "../../constants";
-import { usePuterStore } from "../../lib/puter";
 import Navbar from "~/components/Navbar";
 import ResumeCard from "~/components/ResumeCard";
+
+import { resumes } from "../../constants";
+import { usePuterStore } from "../../lib/puter";
 
 export function meta({}: Route.MetaArgs) {
     return [
@@ -36,8 +37,8 @@ export default function Home() {
                             <ResumeCard key={resume.id} resume={resume}/>
                         ))}
                     </div>
-                )}
+                ) }
             </section>
         </main>
     );
-}
+};
