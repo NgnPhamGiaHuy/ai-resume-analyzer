@@ -15,13 +15,13 @@ const Auth = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(auth.isAuthenticated) navigate(next);
+        if (auth.isAuthenticated) navigate(next);
     }, [auth.isAuthenticated, next]);
 
     return (
         <main className={"min-h-screen flex items-center justify-center bg-[url('/images/bg-main.svg')] bg-cover"}>
             <div className={"gradient-border shadow-lg"}>
-                <section className={"p-10 flex flex-col gap-8 bg-white rounded-2xl"}>
+                <section className={"p-10 flex flex-col gap-8 bg-white rounded-lg"}>
                     <div className={"flex flex-col items-center gap-2 text-center"}>
                         <h1>
                             Welcome
@@ -32,9 +32,9 @@ const Auth = () => {
                     </div>
                     <div>
                         { isLoading ? (
-                          <button className={"auth-button animate-pulse"}>
-                              <p>Signing you in...</p>
-                          </button>
+                            <button className={"auth-button animate-pulse"}>
+                                <p>Signing you in...</p>
+                            </button>
                         ) : (
                             <>
                                 { auth.isAuthenticated ? (

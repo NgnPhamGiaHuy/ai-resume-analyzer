@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils";
 
 const ATS = ({ score, suggestions }: { score: number; suggestions: { type: "good" | "improve"; tip: string }[] }) => {
     return (
-        <div className={cn("w-full p-8 flex flex-col gap-4 rounded-2xl shadow-md bg-gradient-to-b to-light-white", score > 69 ? "from-green-100" : score > 49 ? "from-yellow-100" : "from-red-100")}>
+        <div className={cn("w-full p-8 flex flex-col gap-4 rounded-lg shadow-md bg-gradient-to-b to-light-white", score > 69 ? "from-green-100" : score > 49 ? "from-yellow-100" : "from-red-100")}>
             <div className={"flex flex-row gap-4 items-center"}>
                 <img src={score > 69 ? "/icons/ats-good.svg" : score > 49 ? "/icons/ats-warning.svg" : "/icons/ats-bad.svg"} alt={"ATS"} className={"w-10 h-10"} />
                 <p className={"text-2xl font-semibold"}>ATS Score - { score }/100</p>

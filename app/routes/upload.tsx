@@ -22,7 +22,7 @@ const Upload = () => {
         setFile(file);
     }
 
-    const handleAnalyze = async ({ companyName, jobTitle, jobDescription, file } : { companyName: string, jobTitle: string, jobDescription: string, file: File }) => {
+    const handleAnalyze = async ({ companyName, jobTitle, jobDescription, file }: { companyName: string, jobTitle: string, jobDescription: string, file: File }) => {
         setIsProcessing(true);
         setStatusText("Uploading file...");
 
@@ -37,6 +37,9 @@ const Upload = () => {
         if (!imageFile) return setStatusText("Error: Failed to convert image");
 
         setStatusText("Uploading the image...");
+
+        // Fix the type error by checking if imageFile.file exists before uploading
+        if (!imageFile.file) return setStatusText("Error: No image file to upload");
 
         const uploadedImage = await fs.upload([imageFile.file]);
 
@@ -104,8 +107,8 @@ const Upload = () => {
                     <h1>Smart feedback for your dream job</h1>
                     { isProcessing ? (
                         <>
-                            <h2>{ statusText }</h2>
-                            <img src={"/images/resume-scan.gif"} alt={""} className={"w-full"}/>
+                            <h2>{statusText}</h2>
+                            <img src={"/images/resume-scan.gif"} alt={""} className={"w-full"} />
                         </>
                     ) : (
                         <h2>Drop your resume for an ATS score and improvement tips</h2>
@@ -114,15 +117,15 @@ const Upload = () => {
                         <form id={"upload-form"} onSubmit={handleSubmit} className={"mt-8 flex flex-col gap-4"}>
                             <div className={"form-div"}>
                                 <label htmlFor={"company-name"}>Company Name</label>
-                                <input type={"text"} name={"company-name"} placeholder={"Company Name"} id={"company-name"}/>
+                                <input type={"text"} name={"company-name"} placeholder={"Company Name"} id={"company-name"} />
                             </div>
                             <div className={"form-div"}>
                                 <label htmlFor={"job-title"}>Job Title</label>
-                                <input type={"text"} name={"job-title"} placeholder={"Job Title"} id={"job-title"}/>
+                                <input type={"text"} name={"job-title"} placeholder={"Job Title"} id={"job-title"} />
                             </div>
                             <div className={"form-div"}>
                                 <label htmlFor={"job-description"}>Job Description</label>
-                                <textarea rows={5} name={"job-description"} placeholder={"Job Description"} id={"job-description"}/>
+                                <textarea rows={5} name={"job-description"} placeholder={"Job Description"} id={"job-description"} />
                             </div>
                             <div className={"form-div"}>
                                 <label htmlFor={"uploader"}>Upload Resume</label>

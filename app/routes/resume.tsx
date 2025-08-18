@@ -23,7 +23,7 @@ const Resume = () => {
     const { auth, isLoading, fs, kv } = usePuterStore();
 
     useEffect(() => {
-        if(!isLoading && !auth.isAuthenticated) navigate(`/auth?next=/resume/${id}`);
+        if (!isLoading && !auth.isAuthenticated) navigate(`/auth?next=/resume/${id}`);
     }, [isLoading]);
 
     useEffect(() => {
@@ -70,7 +70,7 @@ const Resume = () => {
                     { imageUrl && resumeUrl && (
                         <div className={"w-fit h-[90%] max-xl:h-fit max-sm:m-0 animate-in fade-in duration-1000 gradient-border"}>
                             <a href={resumeUrl} target={"_blank"} rel={"noopener noreferrer"}>
-                                <img src={imageUrl} alt={"image"} title={"resume"} className={"w-full h-full object-contain rounded-2xl"}/>
+                                <img src={imageUrl} alt={"image"} title={"resume"} className={"w-full h-full object-contain rounded-lg"} />
                             </a>
                         </div>
                     ) }
