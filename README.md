@@ -1,189 +1,180 @@
-# 🚀 CVGenius - AI Resume Analyzer
+# CVGenius – AI Resume Analyzer
 
-<div align="center">
-
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![ReactRouter](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
-![Zustand](https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000)](https://github.com/NgnPhamGiaHuy/ai-resume-analyzer)
-[![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/NgnPhamGiaHuy/ai-resume-analyzer)
-
-</div>
+![License](https://img.shields.io/badge/License-MIT-green.svg) ![Node](https://img.shields.io/badge/node-20.x-blue) ![React](https://img.shields.io/badge/React-19-61dafb) ![React%20Router](https://img.shields.io/badge/React%20Router-7-red) ![Vite](https://img.shields.io/badge/Vite-6-646cff)
 
 ## 📝 Description
 
-CVGenius is a specialized web application that uses AI to analyze resumes and provide precise, actionable feedback for job seekers. The tool targets a 40% improvement in resume effectiveness through data-driven recommendations across five key areas:
+CVGenius is a server‑rendered web app that helps job seekers rapidly evaluate and improve their resumes against modern hiring workflows. It integrates with Puter.js for secure, browser‑based auth, file storage, key‑value persistence, and AI chat to produce structured, actionable feedback.
 
-1. **ATS Compatibility**: Optimize for applicant tracking systems with measurable scores
-2. **Content Quality**: Enhance the impact of your professional experience and accomplishments
-3. **Structural Organization**: Improve resume layout and section hierarchy
-4. **Tone and Style**: Refine language for professional impact and clarity
-5. **Skills Alignment**: Match your skills precisely to job requirements
-
-By leveraging Claude 3.7 Sonnet AI via the Puter.js platform, CVGenius delivers personalized insights within 30 seconds of upload, helping you increase interview callback rates by targeting specific job descriptions.
-
-## 🎯 Key Benefits
-
-- **Immediate Analysis**: Get complete resume feedback in under 30 seconds
-- **ATS Optimization**: Increase pass-through rates by up to 70%
-- **Job-Specific Feedback**: Tailor your resume to specific job descriptions
-- **Actionable Improvements**: Receive concrete suggestions you can implement in minutes
-- **Visual Scoring**: Track improvements with quantitative metrics in 5 categories
-- **Secure Storage**: Maintain a history of all versions with encrypted cloud storage
-- **Cross-Device Access**: Review feedback anywhere with responsive design
+Where manual resume reviews are slow, subjective, and fragmented across tools, CVGenius centralizes the flow: upload a PDF, provide job context, and get an ATS‑aware analysis with clear improvement tips. This reduces typical manual effort by surfacing consistent, structured feedback in one place, and by persisting your submissions for easy comparison later.
 
 ## ✨ Features
 
-- Analyzes resume PDF files using advanced AI technology
-- Generates comprehensive ATS compatibility scores (0-100)
-- Provides detailed feedback on content, structure, tone, and skills
-- Evaluates resume against specific job descriptions and titles
-- Displays visual score indicators and improvement suggestions
-- Supports user authentication and secure resume storage
-- Maintains history of uploaded resumes and analyses
-- Renders PDF preview for easy reference
-- Offers responsive and intuitive user interface
+-   **Upload once, analyze instantly**: Drag‑and‑drop PDF upload with client‑side conversion to a preview image for quick visual verification. Saves the hassle of using separate PDF viewers or converters.
+-   **ATS‑aware scoring**: Generates an ATS score and targeted tips, addressing common pain points like keyword mismatch and formatting issues to reduce guesswork.
+-   **Contextual feedback**: Incorporates job title and description into analysis instructions to align feedback with real roles, cutting down on irrelevant recommendations.
+-   **Persistent history**: Stores each analysis in key‑value storage (`resume:*`) so you can revisit prior uploads and compare progress, avoiding manual note‑taking.
+-   **Secure, user‑centric storage**: Uses Puter’s in‑browser filesystem for uploads; your files and data remain scoped to your account, lowering setup overhead.
+-   **One‑click data management**: A dedicated page to wipe all files and stored entries when you want a clean slate—no manual cleanup required.
+-   **Delightful UX**: SSR for fast initial loads, Tailwind CSS v4 styling, and a focused UI that makes the review journey clear and motivating.
 
-## 🔍 Who Should Use CVGenius?
+## 🖼️ Demo / Screenshots
 
-- **Job Seekers** looking to improve interview callback rates
-- **Career Changers** needing to highlight transferable skills
-- **Recent Graduates** with limited work experience
-- **Professionals** targeting competitive industries
-- **Career Coaches** assisting clients with resume optimization
+-   Upload flow (status and animation during analysis):
+
+    ![Upload animation](public/images/resume-scan.gif)
+
+-   Loading and preview during processing:
+
+    ![Processing preview](public/images/resume-scan-2.gif)
+
+-   Example resume thumbnails (static assets used in UI):
+
+    ![Resume examples](public/images/resume-01.png)
 
 ## ⚙️ Installation
 
-**System Requirements:**
-- Node.js 16.x or higher
-- NPM 8.x or higher
-- Modern web browser (Chrome, Firefox, Edge, Safari)
+The project uses Node.js and npm. It is built with Vite and React Router (SSR). A Dockerfile is provided for containerized builds and runs.
+
+### Prerequisites
+
+-   Node.js 20.x (Dockerfile base image: `node:20-alpine`)
+-   npm (comes with Node)
+
+### Local development
 
 ```bash
-# Clone the repository
-git clone https://github.com/NgnPhamGiaHuy/ai-resume-analyzer.git
-
-# Navigate to project directory
-cd ai-resume-analyzer
-
-# Install dependencies
+# Install dependencies (uses package-lock.json)
 npm install
 
-# Start development server
+# Start the dev server (SSR + HMR)
 npm run dev
+```
+
+-   The terminal will print the local URL to open in a browser.
+-   The app loads `https://js.puter.com/v2/` at runtime; ensure internet access for Puter to initialize.
+
+### Build and serve
+
+```bash
+# Generate the production build
+npm run build
+
+# Serve the built app (SSR server)
+npm run start
+```
+
+-   The start script runs `react-router-serve` with the built server bundle at `./build/server/index.js`.
+
+### Docker
+
+A multi‑stage Dockerfile is included and builds the app with production dependencies only.
+
+```bash
+# Build the image
+docker build -t cvgenius:latest .
+
+# Run the container (expose the default server port, e.g., 3000)
+# Note: The actual port is determined by the server at runtime; map as needed.
+docker run --rm -p 3000:3000 cvgenius:latest
 ```
 
 ## 🚀 Usage
 
-```bash
-# Start the development server
-npm run dev
+1. **Authenticate**
 
-# Build for production
-npm run build
+    - Navigate to `/auth`. Use the provided Log In/Log Out controls backed by Puter auth.
+    - On first load, Puter initializes via the script in the root layout. If Puter fails to load, the UI will report “Puter.js not available.”
 
-# Start production server
-npm start
+2. **Upload and analyze a resume**
 
-# Type checking
-npm run typecheck
-```
+    - Go to `/upload`.
+    - Enter company name, job title, and paste the job description.
+    - Upload a PDF and click “Analyze Resume.”
+    - The app uploads your file to the Puter filesystem, converts the first page to an image, stores metadata under `resume:{uuid}`, and requests AI feedback. You’ll be redirected to `/resume/{id}` when analysis completes.
 
-After starting the server (default: http://localhost:3000), follow these steps:
+3. **Review results**
 
-1. **Sign in** with Puter.js authentication
-2. **Upload** your resume PDF file (max 20MB)
-3. **Enter** the company name, job title and description you're applying for
-4. **Review** detailed analysis with scores and recommendations
-5. **Track** your resume history and implement suggested improvements
+    - At `/resume/{id}`, view an image preview of your resume and the structured feedback: overall score, ATS score with tips, and categorized details (Tone & Style, Content, Structure, Skills).
+
+4. **Manage stored data**
+    - At `/wipe`, view your stored files and wipe all files and KV data with one click when needed.
+
+### Before vs. After workflows
+
+-   Manual review vs. **Automated analysis**:
+    -   Before: Open PDFs in a viewer, skim job descriptions, draft notes, cross‑reference guidelines.
+    -   After: Upload once; receive structured feedback aligned with the job context in one view.
+-   Ad‑hoc tips vs. **ATS‑aware scoring**:
+    -   Before: Guess which keywords or formats matter; inconsistent advice.
+    -   After: A guided ATS score and targeted tips reduce uncertainty and rework.
+-   Scattered tracking vs. **Persistent history**:
+    -   Before: Keep files and notes across folders and docs.
+    -   After: Each submission is stored and quickly discoverable on the homepage.
 
 ## 🔧 Configuration
 
-The application requires Puter.js integration for authentication, storage, and AI capabilities. Make sure the Puter.js script is properly loaded in the root layout.
-
-```html
-<script src="https://js.puter.com/v2/"></script>
-```
-
-### Environment Variables:
-- No additional environment variables required
-- Default configuration works out-of-the-box
+-   No `.env` configuration is required by this repository.
+-   External dependency: `Puter.js` is loaded at runtime in `app/root.tsx`:
+    -   `<script src="https://js.puter.com/v2/"></script>`
+-   AI model selection is set in `lib/puter.ts` during `feedback` calls: `{ model: "claude-3-7-sonnet" }`.
+-   PDF rendering uses `pdfjs-dist` with a worker hosted at `public/pdf.worker.min.mjs`.
 
 ## 🗂️ Folder Structure
 
-```
+```text
 ai-resume-analyzer/
-├── app/                  # Main application code
-│   ├── components/       # Reusable UI components
-│   ├── routes/           # Application routes
-│   └── root.tsx          # Root layout component
-├── constants/            # Application constants
-├── hooks/                # Custom React hooks
-├── lib/                  # Utility functions and services
-│   ├── pdf2image.ts      # PDF to image conversion
-│   ├── puter.ts          # Puter.js integration
-│   └── utils.ts          # Helper functions
-├── public/               # Static assets
-│   ├── icons/            # SVG icons
-│   └── images/           # Image assets
-├── types/                # TypeScript type definitions
-└── README.md             # Project documentation
+├─ app/                       # React Router app (SSR enabled)
+│  ├─ app.css                 # Tailwind CSS v4 styles + utilities
+│  ├─ components/             # Reusable UI components (ATS, Summary, Details, etc.)
+│  ├─ root.tsx                # App layout, Puter init, error boundary
+│  ├─ routes/                 # Route modules: auth, home, upload, resume, wipe
+│  └─ routes.ts               # Route config mapping paths to files
+├─ constants/                 # AI instruction builders and sample data
+├─ hooks/                     # UI hooks (accordion state)
+├─ lib/                       # Puter integration, pdf conversion, utilities
+├─ public/                    # Static assets (icons, images, pdf.worker)
+├─ types/                     # Global TypeScript types (Feedback, Resume, etc.)
+├─ react-router.config.ts     # SSR configuration
+├─ vite.config.ts             # Vite plugins: Tailwind, React Router, TS paths
+├─ tsconfig.json              # TypeScript strict config
+├─ package.json               # Scripts & dependencies
+├─ Dockerfile                 # Multi-stage build and runtime image
+└─ LICENSE                    # MIT license
 ```
+
+## 🧱 Architecture & Execution Flow
+
+-   **Runtime**: React Router (SSR) serves pages; client hydrates for interactivity.
+-   **Auth & Storage**: `lib/puter.ts` wraps the Puter SDK (auth, fs, kv, ai) behind a Zustand store (`usePuterStore`). The root layout injects Puter’s script and calls `init()` to check auth status.
+-   **Upload flow**: `/upload` → upload PDF via Puter FS → convert first page to image with `pdfjs-dist` → upload image → persist `resume:{uuid}` record via KV → call `ai.feedback` with instructions from `constants/` → store parsed JSON feedback → redirect to `/resume/{uuid}`.
+-   **Review flow**: `/resume/:id` reads metadata from KV, fetches blobs from Puter FS, creates object URLs, and renders ATS, Summary, and Details components.
+-   **Data management**: `/wipe` enumerates files with `fs.readdir("./")`, deletes each, and flushes KV.
 
 ## 🤝 Contributing
 
-We welcome contributions that enhance CVGenius's capabilities or fix issues! Please follow these steps:
+Contributions are welcome. A suggested flow:
 
-```bash
-# Fork the repository
-# Clone your fork
-git clone https://github.com/your-username/ai-resume-analyzer.git
+1. Fork the repository on GitHub.
+2. Create a feature branch from `main`.
+3. Use `npm run dev` during development; ensure TypeScript passes via `npm run typecheck`.
+4. Commit with clear messages and open a pull request explaining the change and its impact.
 
-# Create a feature branch
-git checkout -b feature/my-feature
-
-# Make your changes and commit
-git commit -m "Add new feature"
-
-# Push to your fork
-git push origin feature/my-feature
-
-# Create a pull request
-```
-
-### Contribution Guidelines:
-- Maintain code style and formatting
-- Add tests for new functionality
-- Update documentation with changes
-- Follow conventional commit messages
-
+> Note: This repo does not include a separate CONTRIBUTING.md; follow the steps above and keep changes focused and well‑documented.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See `LICENSE` for details.
 
 ## 👤 Author
 
-<div align="center">
-
-**NgnPhamGiaHuy**
-
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NgnPhamGiaHuy)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/nguyenphamgiahuy)
-
-</div>
+| Name          | GitHub                                             | LinkedIn                                                             |
+| ------------- | -------------------------------------------------- | -------------------------------------------------------------------- |
+| NgnPhamGiaHuy | [@NgnPhamGiaHuy](https://github.com/NgnPhamGiaHuy) | [Nguyen Pham Gia Huy](https://www.linkedin.com/in/nguyenphamgiahuy/) |
 
 ## 🙏 Acknowledgements
 
-<div align="center">
-
-[![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)](https://reactrouter.com)
-[![PDF.js](https://img.shields.io/badge/PDF.js-990000?style=for-the-badge&logo=adobe&logoColor=white)](https://mozilla.github.io/pdf.js/)
-[![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![Zustand](https://img.shields.io/badge/zustand-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://github.com/pmndrs/zustand)
-[![Puter.js](https://img.shields.io/badge/Puter.js-4285F4?style=for-the-badge&logoColor=white)](https://puter.com/)
-
-</div>
+-   React, React Router, and Vite for the modern app foundation.
+-   Tailwind CSS v4 for utility‑first styling.
+-   `pdfjs-dist` for reliable PDF rendering in the browser.
+-   Puter.js for auth, storage, KV, and AI APIs that remove backend setup.
